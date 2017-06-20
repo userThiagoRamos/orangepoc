@@ -1,0 +1,17 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{currentLesson.sequence}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list *ngFor="let sentence of sentences">
+        <ion-item>
+            {{sentence.content}}
+            <ion-icon name="play" (click)="read(sentence.content)"></ion-icon>
+        </ion-item>
+    </ion-list>
+</ion-content>

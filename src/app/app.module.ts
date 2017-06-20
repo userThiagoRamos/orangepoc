@@ -7,9 +7,31 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
+import { ChapterPage } from '../pages/chapter/chapter';
+import { SentencePage } from '../pages/sentence/sentence';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { TextToSpeech } from '@ionic-native/text-to-speech'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+import { HttpModule } from '@angular/http';
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '2bc2f73e'
+  },
+  'auth': {
+    'google': {
+      'webClientId': '391035358132-63sb40p7sqkjt8nq3oe0pbgg140b9sio.apps.googleusercontent.com',
+      'scope': ['RECORD_AUDIO','INTERNET','ACCESS_NETWORK_STATE','ACCESS_WIFI_STATE']
+    }
+  }
+};
+
 
 @NgModule({
   declarations: [
@@ -17,11 +39,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    ChapterPage,
+    SentencePage
+
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp),
+    CloudModule.forRoot(cloudSettings)
+
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,12 +59,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    ChapterPage,
+    SentencePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    SpeechRecognition,
+    HttpModule,
+    TextToSpeech
+
   ]
 })
-export class AppModule {}
+export class AppModule { }

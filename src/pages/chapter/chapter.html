@@ -1,0 +1,16 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{currentChapter.description}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list *ngFor="let lesson of lessons">
+        <ion-item>
+            <h1 (click)="onLessonSelect(lesson)">{{lesson.sequence}} - Here is the space for the summay property</h1>
+        </ion-item>
+    </ion-list>
+</ion-content>
